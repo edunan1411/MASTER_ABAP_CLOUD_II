@@ -9,22 +9,26 @@ CLASS zcl_02_basics_log_egf DEFINITION
     DATA: name    TYPE string,
           address TYPE string.
 
-    METHODS: set_attr IMPORTING iv_name    TYPE string
-                                iv_address TYPE string,
+    METHODS:
+
+      set_attr IMPORTING iv_name    TYPE string
+                         iv_address TYPE string,
 
       get_attr EXPORTING ev_name    TYPE string
                          ev_address TYPE string,
 
-      get_phone IMPORTING iv_phone type string
-                RETURNING VALUE(rv_phone) type string.
+      get_phone IMPORTING iv_phone        TYPE string
+                RETURNING VALUE(rv_phone) TYPE string.
 
 
     "Static components
     CLASS-DATA: name2 TYPE string.
 
-    CLASS-METHODS: set_name IMPORTING iv_name TYPE string,
+    CLASS-METHODS:
 
-                   get_name EXPORTING ev_name TYPE string.
+      set_name IMPORTING iv_name TYPE string,
+
+      get_name EXPORTING ev_name TYPE string.
 
   PROTECTED SECTION.
 
