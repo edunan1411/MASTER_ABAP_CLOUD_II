@@ -29,9 +29,8 @@ CLASS zcl_lab_01_ejec_871 IMPLEMENTATION.
 
     data(lo_inst2) = new zcl_lab_05_flight_egf_871(  ).
 
-    out->write( lo_inst2->get_vuelos(
-                  iv_carrid = 'AA'
-                  iv_connid = '2678' ) ).
+    out->write( lo_inst2->get_vuelos( iv_carrid = 'AA'
+                                      iv_connid = '2678' ) ).
 
   ENDMETHOD.
 
