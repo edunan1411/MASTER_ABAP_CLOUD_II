@@ -32,6 +32,21 @@ CLASS zcl_lab_01_ejec_871 IMPLEMENTATION.
     out->write( lo_inst2->get_vuelos( iv_carrid = 'AA'
                                       iv_connid = '2678' ) ).
 
+    DATA lv_elements TYPE zcl_mf_lab_06_elements=>ty_elem_objects.
+
+
+    lv_elements-class = 'Clase Pepe'.
+
+    lv_elements-instance = 'Instancia 1'.
+
+    lv_elements-reference = 'Referencia 2'.
+
+    data(lo_elements) = new zcl_lab_06_elements_egf_871(  ).
+
+    lo_elements->set_object( iv_elements = lv_elements ).
+
+    out->write( lo_elements->ls_elements ).
+
   ENDMETHOD.
 
 ENDCLASS.
