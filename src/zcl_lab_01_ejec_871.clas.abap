@@ -15,7 +15,7 @@ ENDCLASS.
 
 CLASS zcl_lab_01_ejec_871 IMPLEMENTATION.
 
-  METHOD if_oo_adt_classrun~main.
+ METHOD if_oo_adt_classrun~main.
 
     data(lo_inst) = new zcl_lab_04_person_egf_871( ).
 
@@ -49,7 +49,31 @@ CLASS zcl_lab_01_ejec_871 IMPLEMENTATION.
 
     out->write( |{ zcl_lab_06_elements_egf_871=>c_const-c1 }-{ zcl_lab_06_elements_egf_871=>c_const-c2 }-{ zcl_lab_06_elements_egf_871=>c_const-c3 }-{ zcl_lab_06_elements_egf_871=>c_const-c4 }| ).
 
+    data(lo_student) = new zcl_lab_07_student_egf_871(  ).
 
-  ENDMETHOD.
+    lo_student->set_birth_date( '20261026' ).
+
+     out->write( lo_student->birth_date ).
+
+     data(lo_work) = new zcl_lab_08_work_record_egf_871(  ).
+
+     lo_work->open_new_record(
+       iv_date       = '20261012'
+       iv_first_name = 'Pepe'
+       iv_last_name  = 'Gonzales'
+*       iv_surname    =
+     ).
+
+     data(lo_iban) = new zcl_lab_09_account_egf_871(  ).
+
+     lo_iban->set_attr( 'Prueba' ).
+
+     lo_iban->get_attr( IMPORTING iban = data(lv_iban) ).
+
+     out->write( lv_iban ).
+
+    ENDMETHOD.
 
 ENDCLASS.
+
+
