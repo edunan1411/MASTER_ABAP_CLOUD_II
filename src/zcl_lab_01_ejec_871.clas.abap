@@ -47,6 +47,9 @@ CLASS zcl_lab_01_ejec_871 IMPLEMENTATION.
 
     out->write( lo_elements->ls_elements ).
 
+    out->write( |{ zcl_lab_06_elements_egf_871=>c_const-c1 }-{ zcl_lab_06_elements_egf_871=>c_const-c2 }-{ zcl_lab_06_elements_egf_871=>c_const-c3 }-{ zcl_lab_06_elements_egf_871=>c_const-c4 }| ).
+
+
   ENDMETHOD.
 
 ENDCLASS.

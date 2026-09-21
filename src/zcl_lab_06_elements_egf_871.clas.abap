@@ -13,6 +13,13 @@ CLASS zcl_lab_06_elements_egf_871 DEFINITION
 
     DATA: ls_elements TYPE ty_elem_objects.
 
+    CONSTANTS: begin of c_const,
+                 c1 type string value 'valor C1',
+                 c2 TYPE string value 'valor C2',
+                 c3 type string value 'valor C3',
+                 c4 type string VALUE 'valor C4',
+               end of c_const.
+
     METHODS: set_object
       IMPORTING
         iv_elements TYPE ty_elem_objects.
