@@ -24,13 +24,13 @@ ENDCLASS.
 CLASS zcl_lab_02_product_871 IMPLEMENTATION.
   METHOD set_creationdate.
 
-    creation_date = iv_date.
+    me->creation_date = iv_date.
 
   ENDMETHOD.
 
   METHOD set_product.
 
-    product = iv_product.
+    me->product = iv_product.
 
   ENDMETHOD.
 

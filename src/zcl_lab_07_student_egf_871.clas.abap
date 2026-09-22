@@ -19,7 +19,7 @@ CLASS zcl_lab_07_student_egf_871 IMPLEMENTATION.
 
   METHOD set_birth_date.
 
-    birth_date = iv_date.
+    me->birth_date = iv_date.
 
   ENDMETHOD.
 

@@ -25,13 +25,13 @@ CLASS zcl_lab_04_person_egf_871 IMPLEMENTATION.
 
   METHOD get_age.
 
-    ev_age = age.
+    ev_age = me->age.
 
   ENDMETHOD.
 
   METHOD set_age.
 
-    age = iv_age.
+    me->age = iv_age.
 
   ENDMETHOD.
 

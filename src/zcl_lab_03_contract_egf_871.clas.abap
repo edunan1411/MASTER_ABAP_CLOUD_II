@@ -27,7 +27,7 @@ CLASS zcl_lab_03_contract_egf_871 IMPLEMENTATION.
 
   METHOD set_creation_date.
 
-    creation_date = iv_creation_date.
+    me->creation_date = iv_creation_date.
 
   ENDMETHOD.
 

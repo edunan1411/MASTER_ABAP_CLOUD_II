@@ -36,7 +36,7 @@ CLASS zcl_lab_06_elements_egf_871 IMPLEMENTATION.
 
   METHOD set_object.
 
-    ls_elements = iv_elements.
+    me->ls_elements = iv_elements.
 
   ENDMETHOD.
 
