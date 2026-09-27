@@ -1,0 +1,21 @@
+CLASS zcl_12_friends_log_egf DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PRIVATE   "PROTECTED "PUBLIC
+  GLOBAL FRIENDS zcl_13_friends_log_egf.
+
+  PUBLIC SECTION.
+  PROTECTED SECTION.
+
+    DATA: PROTECTED_attr TYPE string.
+
+  PRIVATE SECTION.
+
+    DATA: privated_attr TYPE string.
+
+ENDCLASS.
+
+
+
+CLASS zcl_12_friends_log_egf IMPLEMENTATION.
+ENDCLASS.

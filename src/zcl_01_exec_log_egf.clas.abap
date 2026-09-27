@@ -79,22 +79,61 @@ CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 
 **Narrowing Cast -UP
 
-    DATA(lo_animal) = NEW zcl_10_narrowing_log_egf( ).
+*    DATA(lo_animal) = NEW zcl_10_narrowing_log_egf( ).
+*
+*    DATA(lo_lion) = NEW zcl_11_widening_log_egf( ).
+*
+*    out->write( lo_animal->walk( ) ).
+*
+*    out->write( lo_lion->walk( ) ).
+*
+*    lo_animal = lo_lion.
+*
+*
+*    out->write( 'Narrowing Cast' ).
+*
+*    out->write( lo_animal->walk( ) ).
+*
+*    out->write( lo_lion->walk( ) ).
+*
+*** Widening Cast - Down
+*
+*    TRY.
+*
+*        lo_lion ?= lo_animal.
+*
+*      CATCH cx_sy_move_cast_error.
+*
+*        out->write( 'Casting error' ).
+*
+*        RETURN.
+*
+*    ENDTRY.
+*
+*
+*    out->write( 'Widening Cast' ).
+*
+*    out->write( lo_animal->walk( ) ).
+*
+*    out->write( lo_lion->walk( ) ).
 
-    DATA(lo_lion) = NEW zcl_11_widening_log_egf( ).
+** Interfaces
 
-    out->write( lo_animal->walk( ) ).
+data(lo_interf) = new zcl_15_interfaces_log_egf( ).
 
-    out->write( lo_lion->walk( ) ).
+lo_interf->get_conn_id(
+*  RECEIVING
+*    rv_conn_id =
+).
 
-    lo_animal = lo_lion.
+lo_interf->zcl_03_egf~get_airports(
+  EXPORTING
+    iv_airport_id = '001'
+*  RECEIVING
+*    rs_airport    =
+).
 
 
-    out->write( 'Narrowing Cast' ).
-
-    out->write( lo_animal->walk( ) ).
-
-    out->write( lo_lion->walk( ) ).
 
   ENDMETHOD.
 
