@@ -152,26 +152,62 @@ CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 
 **Polymorphism with interfaces
 
-    DATA: gt_companies TYPE STANDARD TABLE OF REF TO zif_04_egf,
-          lo_company   TYPE REF TO zif_04_egf,
-          lo_comp_eu   TYPE REF TO zcl_22_polym_interfaces_egf,
-          lo_comp_usa  TYPE REF TO zcl_23_polym_interfaces_2_egf,
-          lo_plant     TYPE REF TO zcl_24_plant_egf.
+*    DATA: gt_companies TYPE STANDARD TABLE OF REF TO zif_04_egf,
+*          lo_company   TYPE REF TO zif_04_egf,
+*          lo_comp_eu   TYPE REF TO zcl_22_polym_interfaces_egf,
+*          lo_comp_usa  TYPE REF TO zcl_23_polym_interfaces_2_egf,
+*          lo_plant     TYPE REF TO zcl_24_plant_egf.
+*
+*    lo_comp_eu = NEW #(  ).
+*    APPEND lo_comp_eu TO gt_companies.
+*
+*    lo_comp_usa = NEW #(  ).
+*    APPEND lo_comp_usa TO gt_companies.
+*
+*    lo_plant = NEW #(  ).
+*
+*    loop at gt_companies into lo_company.
+*      out->write( lo_company->define_company( ) ).
+*      out->write( lo_plant->assign_company( io_company = lo_company ) ).
+*    endloop.
 
-    lo_comp_eu = NEW #(  ).
-    APPEND lo_comp_eu TO gt_companies.
+** Association
+*data(lo_credit_card) = new zcl_25_credit_card_egf(  ).
+*data(lo_client) = new zcl_26_cliente_egf( ).
+*
+*lo_credit_card->set_card_num( '9999 8888 7777 6666' ).
+*lo_client->set_credit_card( lo_credit_card ).
+*
+*out->write( lo_client->get_credit_card( )->get_card_num( ) ).
 
-    lo_comp_usa = NEW #(  ).
-    APPEND lo_comp_usa TO gt_companies.
+**Composition
+*    DATA(lo_keyboard) = NEW zcl_27_keyboard_egf( ).
+*    DATA(lo_laptop) = NEW zcl_28_laptop_egf( lo_keyboard ).
+*
+*    lo_keyboard->keyboard_type = 'ES'.
+*
+*    out->write( lo_laptop->keyboard->keyboard_type ).
+*
 
-    lo_plant = NEW #(  ).
+**Composition
+    DATA: lo_vat_ind_1 TYPE REF TO zcl_29_vat_ind_egf,
+          lo_vat_ind_2 TYPE REF TO zcl_29_vat_ind_egf,
+          lo_vat_ind_3 TYPE REF TO zcl_29_vat_ind_egf.
 
-    loop at gt_companies into lo_company.
-      out->write( lo_company->define_company( ) ).
-      out->write( lo_plant->assign_company( io_company = lo_company ) ).
-    endloop.
+    lo_vat_ind_1 = NEW #(  ).
+*    lo_vat_ind_2 = NEW #(  ).
+*    lo_vat_ind_3 = NEW #(  ).
 
+    lo_vat_ind_2 = lo_vat_ind_1.
+    lo_vat_ind_3 = lo_vat_ind_1.
+
+    lo_vat_ind_1->vat_ind = 'A1'.
+    lo_vat_ind_2->vat_ind = 'A2'.
+    lo_vat_ind_3->vat_ind = 'A3'.
+
+    out->write( lo_vat_ind_1->vat_ind ).
+    out->write( lo_vat_ind_2->vat_ind ).
+    out->write( lo_vat_ind_3->vat_ind ).
 
   ENDMETHOD.
-
 ENDCLASS.

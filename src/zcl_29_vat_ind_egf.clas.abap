@@ -1,0 +1,15 @@
+CLASS zcl_29_vat_ind_egf DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    data: vat_ind type string.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcl_29_vat_ind_egf IMPLEMENTATION.
+ENDCLASS.

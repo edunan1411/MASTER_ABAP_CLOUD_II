@@ -1,0 +1,17 @@
+CLASS zcl_27_keyboard_egf DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+
+    data: keyboard_type type string.
+
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcl_27_keyboard_egf IMPLEMENTATION.
+ENDCLASS.
