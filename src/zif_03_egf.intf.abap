@@ -1,4 +1,4 @@
-INTERFACE zcl_03_egf
+INTERFACE zif_03_egf
   PUBLIC .
 
   METHODS:

@@ -18,7 +18,7 @@ CLASS zcl_16_interfaces_2_log_egf IMPLEMENTATION.
 
   METHOD my_meth.
 
-    me->zcl_01_egf~conn_id = '002'.
+    me->zif_01_egf~conn_id = '002'.
 
   ENDMETHOD.
 

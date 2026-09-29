@@ -1,7 +1,7 @@
-INTERFACE zcl_01_egf
+INTERFACE zif_01_egf
   PUBLIC .
 
-  INTERFACES: zcl_03_egf.
+  INTERFACES: zif_03_egf.
 
   CLASS-DATA: com_id TYPE string.
 

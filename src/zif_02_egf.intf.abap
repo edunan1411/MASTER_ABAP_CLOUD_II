@@ -1,4 +1,4 @@
-INTERFACE zcl_02_egf
+INTERFACE zif_02_egf
   PUBLIC .
 
   TYPES: BEGIN OF ty_cust_addr,

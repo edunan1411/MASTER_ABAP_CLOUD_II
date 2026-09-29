@@ -5,12 +5,12 @@ CLASS zcl_15_interfaces_log_egf DEFINITION
 
   PUBLIC SECTION.
 
-    INTERFACES: zcl_01_egf,
-      zcl_02_egf.
+    INTERFACES: zif_01_egf,
+      zif_02_egf.
 
-    ALIASES: set_conn_id FOR zcl_01_egf~set_conn_id,
-             get_conn_id FOR zcl_01_egf~get_conn_id,
-             get_customer FOR zcl_02_egf~get_customer.
+    ALIASES: set_conn_id FOR zif_01_egf~set_conn_id,
+             get_conn_id FOR zif_01_egf~get_conn_id,
+             get_customer FOR zif_02_egf~get_customer.
 
 
 
@@ -25,13 +25,13 @@ CLASS zcl_15_interfaces_log_egf IMPLEMENTATION.
 
   METHOD get_conn_id.
 
-    rv_conn_id = me->zcl_01_egf~conn_id.
+    rv_conn_id = me->zif_01_egf~conn_id.
 
   ENDMETHOD.
 
   METHOD set_conn_id.
 
-    me->zcl_01_egf~conn_id = iv_conn_id.
+    me->zif_01_egf~conn_id = iv_conn_id.
 
   ENDMETHOD.
 
@@ -45,7 +45,7 @@ CLASS zcl_15_interfaces_log_egf IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD zcl_03_egf~get_airports.
+  METHOD zif_03_egf~get_airports.
 
 
 

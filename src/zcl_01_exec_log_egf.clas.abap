@@ -119,20 +119,57 @@ CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 
 ** Interfaces
 
-data(lo_interf) = new zcl_15_interfaces_log_egf( ).
+*data(lo_interf) = new zcl_15_interfaces_log_egf( ).
+*
+*lo_interf->get_conn_id(
+**  RECEIVING
+**    rv_conn_id =
+*).
+*
+*lo_interf->zcl_03_egf~get_airports(
+*  EXPORTING
+*    iv_airport_id = '001'
+**  RECEIVING
+**    rs_airport    =
+*).
 
-lo_interf->get_conn_id(
-*  RECEIVING
-*    rv_conn_id =
-).
+**Polymorphism
 
-lo_interf->zcl_03_egf~get_airports(
-  EXPORTING
-    iv_airport_id = '001'
-*  RECEIVING
-*    rs_airport    =
-).
+*    DATA: gt_airplanes   TYPE STANDARD TABLE OF REF TO zcl_19_polymofirsm_log_egf,
+*          lo_airplane    TYPE REF TO zcl_19_polymofirsm_log_egf,
+*          lo_cargo_plane TYPE REF TO zcl_20_cargo_plane_log_egf,
+*          lo_pass_plane  TYPE REF TO zcl_21_pass_plane_log_egf.
+*
+*    lo_cargo_plane = NEW #(  ).
+*    APPEND lo_cargo_plane TO gt_airplanes.
+*
+*    lo_pass_plane = NEW #(  ).
+*    APPEND lo_pass_plane TO gt_airplanes.
+*
+*    LOOP AT gt_airplanes INTO lo_airplane.
+*      out->write( lo_airplane->airplane_type( ) ).
+*    ENDLOOP.
 
+**Polymorphism with interfaces
+
+    DATA: gt_companies TYPE STANDARD TABLE OF REF TO zif_04_egf,
+          lo_company   TYPE REF TO zif_04_egf,
+          lo_comp_eu   TYPE REF TO zcl_22_polym_interfaces_egf,
+          lo_comp_usa  TYPE REF TO zcl_23_polym_interfaces_2_egf,
+          lo_plant     TYPE REF TO zcl_24_plant_egf.
+
+    lo_comp_eu = NEW #(  ).
+    APPEND lo_comp_eu TO gt_companies.
+
+    lo_comp_usa = NEW #(  ).
+    APPEND lo_comp_usa TO gt_companies.
+
+    lo_plant = NEW #(  ).
+
+    loop at gt_companies into lo_company.
+      out->write( lo_company->define_company( ) ).
+      out->write( lo_plant->assign_company( io_company = lo_company ) ).
+    endloop.
 
 
   ENDMETHOD.
