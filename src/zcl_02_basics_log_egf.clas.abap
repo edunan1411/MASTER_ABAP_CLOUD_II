@@ -3,6 +3,7 @@ CLASS zcl_02_basics_log_egf DEFINITION
   FINAL
   CREATE PUBLIC .
 
+
   PUBLIC SECTION.
 
     TYPES: BEGIN OF ty_flight,
