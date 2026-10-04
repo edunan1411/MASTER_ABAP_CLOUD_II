@@ -189,25 +189,58 @@ CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 *    out->write( lo_laptop->keyboard->keyboard_type ).
 *
 
-**Composition
-    DATA: lo_vat_ind_1 TYPE REF TO zcl_29_vat_ind_egf,
-          lo_vat_ind_2 TYPE REF TO zcl_29_vat_ind_egf,
-          lo_vat_ind_3 TYPE REF TO zcl_29_vat_ind_egf.
+***Composition
+*    DATA: lo_vat_ind_1 TYPE REF TO zcl_29_vat_ind_egf,
+*          lo_vat_ind_2 TYPE REF TO zcl_29_vat_ind_egf,
+*          lo_vat_ind_3 TYPE REF TO zcl_29_vat_ind_egf.
+*
+*    lo_vat_ind_1 = NEW #(  ).
+**    lo_vat_ind_2 = NEW #(  ).
+**    lo_vat_ind_3 = NEW #(  ).
+*
+*    lo_vat_ind_2 = lo_vat_ind_1.
+*    lo_vat_ind_3 = lo_vat_ind_1.
+*
+*    lo_vat_ind_1->vat_ind = 'A1'.
+*    lo_vat_ind_2->vat_ind = 'A2'.
+*    lo_vat_ind_3->vat_ind = 'A3'.
+*
+*    out->write( lo_vat_ind_1->vat_ind ).
+*    out->write( lo_vat_ind_2->vat_ind ).
+*    out->write( lo_vat_ind_3->vat_ind ).
 
-    lo_vat_ind_1 = NEW #(  ).
-*    lo_vat_ind_2 = NEW #(  ).
-*    lo_vat_ind_3 = NEW #(  ).
+**Generic Class Object
+*  data: lo_object type REF TO object.
+*
+*  lo_object = new zcl_30_product_log_egf( ).
+*
+*  data(lv_method_name) = 'RETURN_CATEGORY'.
+*  DATA lv_category type string.
+*
+*  call method lo_object->(lv_method_name) RECEIVING rv_category = lv_category.
+*  out->write( lv_category ).
 
-    lo_vat_ind_2 = lo_vat_ind_1.
-    lo_vat_ind_3 = lo_vat_ind_1.
+*Events
+    DATA(lo_timer) = NEW zcl_31_timer_log_egf( ).
+    DATA(lo_conexion) = NEW zcl_32_conexion_log_egf( ).
 
-    lo_vat_ind_1->vat_ind = 'A1'.
-    lo_vat_ind_2->vat_ind = 'A2'.
-    lo_vat_ind_3->vat_ind = 'A3'.
+* Handler reference
+    SET HANDLER lo_conexion->on_time_out FOR lo_timer.
 
-    out->write( lo_vat_ind_1->vat_ind ).
-    out->write( lo_vat_ind_2->vat_ind ).
-    out->write( lo_vat_ind_3->vat_ind ).
+    DO.
+      WAIT UP TO 1 SECONDS.
+      lo_timer->increment_counter( 1 ).
+
+      IF lo_conexion->hour IS INITIAL.
+        out->write( |Event no yet executed: { cl_abap_context_info=>get_system_time( ) }| ).
+      ELSE.
+        out->write( |Event was executed at: { lo_conexion->hour }-{ lo_conexion->sender_user } | ).
+        EXIT.
+      ENDIF.
+    ENDDO.
+
+
+
 
   ENDMETHOD.
 ENDCLASS.
