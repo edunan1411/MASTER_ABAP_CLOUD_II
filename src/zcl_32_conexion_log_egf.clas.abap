@@ -4,8 +4,9 @@ CLASS zcl_32_conexion_log_egf DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-    DATA: hour TYPE zsyst_uzeit,
-          sender_user type string.
+
+    DATA: hour        TYPE zsyst_uzeit,
+          sender_user TYPE string.
 
     METHODS:
       on_time_out FOR EVENT time_out OF zcl_31_timer_log_egf
@@ -19,6 +20,7 @@ ENDCLASS.
 
 
 CLASS zcl_32_conexion_log_egf IMPLEMENTATION.
+
 
   METHOD on_time_out.
     me->hour = ev_hour.

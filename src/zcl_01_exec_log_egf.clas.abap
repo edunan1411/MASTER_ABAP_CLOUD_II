@@ -221,23 +221,54 @@ CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 *  out->write( lv_category ).
 
 *Events
-    DATA(lo_timer) = NEW zcl_31_timer_log_egf( ).
-    DATA(lo_conexion) = NEW zcl_32_conexion_log_egf( ).
+*  data(lo_timer) = new zcl_31_timer_log_egf( ).
+*  data(lo_conexion) = new zcl_32_conexion_log_egf( ).
+*
+** Handle reference
+*  SET HANDLER lo_conexion->on_time_out for lo_timer.
+*
+*  do.
+*    wait up to 1 seconds.
+*    lo_timer->incremento_counter( 1 ).
+*
+*    if lo_conexion->hour is INITIAL.
+*      out->write( |Event not yet excecuted: { cl_abap_context_info=>get_system_time( ) }| ).
+*    else.
+*      out->write( |Event was raised at: { lo_conexion->hour }-{ lo_conexion->sender_user }| ).
+*      exit.
+*    endif.
+*
+*  enddo.
 
-* Handler reference
-    SET HANDLER lo_conexion->on_time_out FOR lo_timer.
+*Events with Interfaces.
+*    DATA(lo_central_bank) = NEW zcl_33_banks_log_egf( ).
+*    DATA(lo_client_bank) = NEW zcl_34_client_log_egf( ).
+*
+*    SET HANDLER lo_client_bank->on_new_transfer FOR lo_central_bank.
+*
+*    DO 5 TIMES.
+*      WAIT UP TO 1 SECONDS.
+*      out->write( lo_central_bank->create_notificacion( )  ).
+*      out->write(  lo_client_bank->notification ).
+*      IF sy-index = 3.
+*        SET HANDLER lo_client_bank->on_new_transfer FOR lo_central_bank ACTIVATION abap_false.
+*        lo_client_bank->notification = 'No Handler for event new transfer'.
+*      ENDIF.
+*    ENDDO.
 
-    DO.
-      WAIT UP TO 1 SECONDS.
-      lo_timer->increment_counter( 1 ).
+*Exemptions
+    TRY.
+        DATA(lo_exemp) = NEW zcl_35_manage_auth_log_egf( ).
+        lo_exemp->check_user( sy-uname ).
 
-      IF lo_conexion->hour IS INITIAL.
-        out->write( |Event no yet executed: { cl_abap_context_info=>get_system_time( ) }| ).
-      ELSE.
-        out->write( |Event was executed at: { lo_conexion->hour }-{ lo_conexion->sender_user } | ).
-        EXIT.
-      ENDIF.
-    ENDDO.
+     " CATCH cx_root INTO DATA(lx_ex).
+     "   out->write( lx_ex->get_text( ) ).
+
+      CATCH zcx_01_auth_log_egf into data(lx_excep).
+      out->write( lx_excep->get_text( ) ).
+
+    ENDTRY.
+
 
 
 
