@@ -16,6 +16,8 @@ ENDCLASS.
 CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
+
+
 *    out->write( 'hola que tal' ).
 
 *
@@ -257,19 +259,47 @@ CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 *    ENDDO.
 
 *Exemptions
+*    TRY.
+*        DATA(lo_exemp) = NEW zcl_35_manage_auth_log_egf( ).
+*        lo_exemp->check_user( sy-uname ).
+*
+*     " CATCH cx_root INTO DATA(lx_ex).
+*     "   out->write( lx_ex->get_text( ) ).
+*
+*      CATCH zcx_01_auth_log_egf into data(lx_excep).
+*      out->write( lx_excep->get_text( ) ).
+*
+*    ENDTRY.
+
+*Design Patterns
+*    DATA: lo_sign1 TYPE REF TO zcl_37_singleton_log_egf,
+*          lo_sign2 TYPE REF TO zcl_37_singleton_log_egf.
+*
+*    lo_sign1 = zcl_37_singleton_log_egf=>get_instance( ).
+*    wait up to 1 seconds.
+*    lo_sign2 = zcl_37_singleton_log_egf=>get_instance( ).
+*
+*    out->write( lo_sign1->time ).
+*    out->write( lo_sign2->time ).
+
+*Factory Method
+    DATA: lo_shape   TYPE REF TO zif_06_log_egf,
+          lo_factory TYPE REF TO zcl_41_factory_log_egf.
+
+    lo_factory = NEW #( ).
+
     TRY.
-        DATA(lo_exemp) = NEW zcl_35_manage_auth_log_egf( ).
-        lo_exemp->check_user( sy-uname ).
 
-     " CATCH cx_root INTO DATA(lx_ex).
-     "   out->write( lx_ex->get_text( ) ).
+        lo_shape = lo_factory->get_shape( 'Hexagon' ).
 
-      CATCH zcx_01_auth_log_egf into data(lx_excep).
-      out->write( lx_excep->get_text( ) ).
+      CATCH cx_root INTO DATA(lx_exp).
+        out->write( lx_exp->get_text( ) ).
 
     ENDTRY.
 
-
+    IF lo_shape IS BOUND.
+      out->write( lo_shape->draw_shape( ) ).
+    ENDIF.
 
 
 

@@ -30,6 +30,7 @@ CLASS zcl_01_temporizador_edunan IMPLEMENTATION.
 
   METHOD increment_counter.
     me->counter += iv_counter.
+    me->check_limit( ).
   ENDMETHOD.
 
 ENDCLASS.
