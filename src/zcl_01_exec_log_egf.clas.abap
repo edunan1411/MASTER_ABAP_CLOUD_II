@@ -283,24 +283,44 @@ CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 *    out->write( lo_sign2->time ).
 
 *Factory Method
-    DATA: lo_shape   TYPE REF TO zif_06_log_egf,
-          lo_factory TYPE REF TO zcl_41_factory_log_egf.
+*    DATA: lo_shape   TYPE REF TO zif_06_log_egf,
+*          lo_factory TYPE REF TO zcl_41_factory_log_egf.
+*
+*    lo_factory = NEW #( ).
+*
+*    TRY.
+*
+*        lo_shape = lo_factory->get_shape( 'Hexagon' ).
+*
+*      CATCH cx_root INTO DATA(lx_exp).
+*        out->write( lx_exp->get_text( ) ).
+*
+*    ENDTRY.
+*
+*    IF lo_shape IS BOUND.
+*      out->write( lo_shape->draw_shape( ) ).
+*    ENDIF.
+*
 
-    lo_factory = NEW #( ).
+*Model view controller
+    DATA: lv_name TYPE string VALUE 'Juan López',
+          lv_role TYPE string VALUE 'Sr.Developer'.
 
-    TRY.
+    DATA(lo_model) = NEW zcl_42_model_log_egf(
+      iv_name = lv_name
+      iv_role = lv_role ).
 
-        lo_shape = lo_factory->get_shape( 'Hexagon' ).
+    DATA(lo_view) = NEW zcl_43_view_log_egf( ).
 
-      CATCH cx_root INTO DATA(lx_exp).
-        out->write( lx_exp->get_text( ) ).
+    DATA(lo_controller) = NEW zcl_44_controller_log_egf( ).
 
-    ENDTRY.
+    lo_controller->set_model( lo_model ).
+    lo_controller->set_view( lo_view ).
 
-    IF lo_shape IS BOUND.
-      out->write( lo_shape->draw_shape( ) ).
-    ENDIF.
-
+    lo_controller->get_view( )->display_employee(
+      iv_name = lo_model->get_name( )
+      iv_role = lo_model->get_role( )
+      iv_out  = out ).
 
 
   ENDMETHOD.
