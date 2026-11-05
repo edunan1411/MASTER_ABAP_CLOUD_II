@@ -1,0 +1,4 @@
+@EndUserText.label: 'SD-Custom Entity'
+define service ZSD_CDS_19_log_egf {
+  expose zcds_19_log_egf as Travel;
+}

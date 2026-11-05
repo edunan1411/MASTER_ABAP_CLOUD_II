@@ -322,19 +322,30 @@ CLASS zcl_01_exec_log_egf IMPLEMENTATION.
 *      iv_role = lo_model->get_role( )
 *      iv_out  = out ).
 
-*Model Observer
-    DATA(lo_process) = NEW zcl_45_processes_log_egf( ).
-    DATA(lo_sales) = NEW zcl_47_sales_dep_log_egf( ).
-    DATA(lo_billing) = NEW zcl_48_billing_dep_log_egf( ).
-
-    SET HANDLER lo_sales->on_modified_state FOR lo_process.
-    SET HANDLER lo_billing->on_modified_state FOR lo_process.
-
-    lo_process->set_state( 'New Sales 01 - Product 999 - Iphone 17' ).
-
-    out->write( lo_process->get_state( ) ).
-    out->write( lo_sales->state ).
-    out->write( lo_billing->state ).
+**Model Observer
+*    DATA(lo_process) = NEW zcl_45_processes_log_egf( ).
+*    DATA(lo_sales) = NEW zcl_47_sales_dep_log_egf( ).
+*    DATA(lo_billing) = NEW zcl_48_billing_dep_log_egf( ).
+*
+*    SET HANDLER lo_sales->on_modified_state FOR lo_process.
+*    SET HANDLER lo_billing->on_modified_state FOR lo_process.
+*
+*    lo_process->set_state( 'New Sales 01 - Product 999 - Iphone 17' ).
+*
+*    out->write( lo_process->get_state( ) ).
+*    out->write( lo_sales->state ).
+*    out->write( lo_billing->state ).
+*
+*modify zemployee_lgl from table @( value #( ( employee = '1' manager = ' ' name = 'Name1' )
+*                                            ( employee = '2' manager = '1' name = 'Name2' )
+*                                            ( employee = '3' manager = '2' name = 'Name3' )
+*                                            ( employee = '4' manager = '2' name = 'Name4' )
+*                                            ( employee = '5' manager = ' ' name = 'Name5' )
+*                                            ( employee = '6' manager = '5' name = 'Name6' )
+*                                            ( employee = '7' manager = '5' name = 'Name7' )
+*                                            ( employee = '8' manager = '7' name = 'Name8' )
+*                                            ( employee = '9' manager = '8' name = 'Name9' )
+*                                            ( employee = '10' manager = '8' name = 'Name10' ) ) ).
 
 
   ENDMETHOD.
